@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/pagesconnect"
+    app:startDestination="@id/mainPage">
+
+
+    <fragment
+        android:id="@+id/mainPage"
+        android:name="com.example.e_commerceapp.Pages.MainPage"
+        android:label="MainPage" >
+        <action
+            android:id="@+id/action_mainPage_to_favoritiesPage"
+            app:destination="@id/favoritiesPage" />
+        <action
+            android:id="@+id/action_mainPage_to_cartPage"
+            app:destination="@id/cartPage" />
+        <action
+            android:id="@+id/action_mainPage_to_profilePage"
+            app:destination="@id/profilePage" />
+        <action
+            android:id="@+id/action_mainPage_to_productPage"
+            app:destination="@id/productPage" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoritiesPage"
+        android:name="com.example.e_commerceapp.Pages.FavoritiesPage"
+        android:label="FavoritiesPage" />
+    <fragment
+        android:id="@+id/cartPage"
+        android:name="com.example.e_commerceapp.Pages.CartPage"
+        android:label="fragment_cart_page"
+        tools:layout="@layout/fragment_cart_page" />
+    <fragment
+        android:id="@+id/profilePage"
+        android:name="com.example.e_commerceapp.Pages.ProfilePage"
+        android:label="fragment_profile_page"
+        tools:layout="@layout/fragment_profile_page" />
+    <fragment
+        android:id="@+id/productPage"
+        android:name="com.example.e_commerceapp.Pages.ProductPage"
+        android:label="ProductPage" />
+
+
+</navigation>
