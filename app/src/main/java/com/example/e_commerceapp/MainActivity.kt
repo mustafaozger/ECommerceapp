@@ -14,6 +14,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.e_commerceapp.Pages.CartPage
+import com.example.e_commerceapp.Pages.FavoritiesPage
 import com.example.e_commerceapp.Pages.MainPage
 import com.example.e_commerceapp.Pages.ProfilePage
 import com.example.e_commerceapp.databinding.ActivityMainBinding
@@ -37,7 +38,7 @@ class MainActivity : AppCompatActivity() {
                    }
 
                    R.id.bottomFavorite -> {
-                       loadFragment(CartPage())
+                       loadFragment(FavoritiesPage())
                        return@setOnItemSelectedListener true
                    }
 
