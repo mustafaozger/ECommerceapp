@@ -1,4 +1,7 @@
 package com.example.e_commerceapp.viewmodel
 
-class CartPageViewModel {
+import androidx.lifecycle.ViewModel
+
+class CartPageViewModel :ViewModel(){
+
 }

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/pagesconnect"
-    app:startDestination="@id/mainPage">
+    app:startDestination="@id/loginPage">
 
 
     <fragment
@@ -41,6 +41,25 @@
         android:id="@+id/productPage"
         android:name="com.example.e_commerceapp.Pages.ProductPage"
         android:label="ProductPage" />
+    <fragment
+        android:id="@+id/loginPage"
+        android:name="com.example.e_commerceapp.Pages.LoginPage"
+        android:label="LoginPage" >
+        <action
+            android:id="@+id/action_loginPage_to_mainPage"
+            app:destination="@id/mainPage" />
+        <action
+            android:id="@+id/action_loginPage_to_registryPage"
+            app:destination="@id/registryPage" />
+    </fragment>
+    <fragment
+        android:id="@+id/registryPage"
+        android:name="com.example.e_commerceapp.Pages.RegistryPage"
+        android:label="RegistryPage" >
+        <action
+            android:id="@+id/action_registryPage_to_loginPage"
+            app:destination="@id/loginPage" />
+    </fragment>
 
 
 </navigation>

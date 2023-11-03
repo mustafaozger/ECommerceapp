@@ -20,6 +20,7 @@ import com.example.e_commerceapp.adapter.MainPageCategoryAdapter
 import com.example.e_commerceapp.databinding.FragmentMainPageBinding
 import com.example.e_commerceapp.databinding.MainPageBannerDesignBinding
 import com.example.e_commerceapp.viewmodel.MainPageViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class MainPage : Fragment() {
@@ -73,6 +74,13 @@ class MainPage : Fragment() {
         // Inflate the layout for this fragment
         return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val bottomNavigationView=requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        bottomNavigationView.visibility=View.VISIBLE
+    }
+
 
 
 }
