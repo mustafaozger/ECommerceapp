@@ -32,22 +32,30 @@ class CartPageAdapter(var context: Context,var cartList: ArrayList<CartList>,var
         val product=cartList.get(position).product
 
         binding.cartProductCount.text=cartList.get(position).productCount.toString()
-        val image=reSizePhoto(product!!.product_imag!!)
-        binding.cartPrdctImage.setImageBitmap(image)
-        binding.cartTotalPrice.setText((cartList.get(position).productCount!! * product.product_price!!).toString())
-        binding.cartPrductName.setText(product.product_name)
+//        val image=reSizePhoto(product!!.product_imag!!)
+//        binding.cartPrdctImage.setImageBitmap(image)
+        if (product != null) {
+            binding.cartTotalPrice.setText((cartList.get(position).productCount!! * product.product_price!!).toString())
+        }
+        if (product != null) {
+            binding.cartPrductName.setText(product.product_name)
+        }
 
         binding.cartAddProduct.setOnClickListener {
 
             binding.cartProductCount.text=(binding.cartProductCount.text.toString().toInt()+1).toString()
-            binding.cartTotalPrice.text=(product.product_price!! *binding.cartProductCount.text.toString().toInt()).toString()
+            if (product != null) {
+                binding.cartTotalPrice.text=(product.product_price!! *binding.cartProductCount.text.toString().toInt()).toString()
+            }
 
         }
 
         binding.cartMinusProdut.setOnClickListener {
             if(binding.cartProductCount.text.toString().toInt()>0){
                 binding.cartProductCount.text=(binding.cartProductCount.text.toString().toInt()-1).toString()
-                binding.cartTotalPrice.text=(product.product_price!! *binding.cartProductCount.text.toString().toInt()).toString()
+                if (product != null) {
+                    binding.cartTotalPrice.text=(product.product_price!! *binding.cartProductCount.text.toString().toInt()).toString()
+                }
             }
 
         }

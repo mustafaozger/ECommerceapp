@@ -4,13 +4,17 @@ import android.content.Context
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.e_commerceapp.Classes.Product
 import com.example.e_commerceapp.R
-import com.example.e_commerceapp.databinding.DesignCartBinding
+
 import com.example.e_commerceapp.databinding.DesignProductListBinding
+import com.squareup.picasso.Picasso
+import kotlin.math.log
 
 class ProductPageAdapter(var context: Context,var productList: List<Product>,var resources: Resources):
     RecyclerView.Adapter<ProductPageAdapter.ProductPageVH>() {
@@ -29,10 +33,13 @@ class ProductPageAdapter(var context: Context,var productList: List<Product>,var
     override fun onBindViewHolder(holder: ProductPageVH, position: Int) {
         val binding=holder.binding
         val product=productList.get(position)
-        val image=reSizePhoto(product.product_imag!!)
-        binding.imageView2.setImageBitmap(image)
-//        binding.imageView2.setImageResource(product.product_imag!!)
-        binding.productPageProductName.setText(product.product_name)
+
+        product.product_image?.let { Log.d("hatamUrl", it) }
+        Picasso.get().load(product.product_image).resize(450,450)
+            .placeholder(R.drawable.product_loading_photo)
+            .into(binding.imageView2)
+
+        binding.productPageProductName.setText(product.product_name+ " " + product.product_info)
         binding.productPagePrice.setText(product.product_price.toString())
 
         binding.addCartButton.setOnClickListener {
@@ -41,16 +48,6 @@ class ProductPageAdapter(var context: Context,var productList: List<Product>,var
         }
     }
 
-
-    private fun reSizePhoto(image:Int):Bitmap{
-        val options= BitmapFactory.Options()
-        options.inMutable=true
-        val imageBitmap=BitmapFactory.decodeResource(resources, image,options)
-
-        val newWidth = 450 // Yeni genişlik
-        val newHeight = 450 // Yeni yükseklik
-        val resizedBitmap = Bitmap.createScaledBitmap(imageBitmap, newWidth, newHeight, true)
-        return resizedBitmap
-    }
+//
 
 }

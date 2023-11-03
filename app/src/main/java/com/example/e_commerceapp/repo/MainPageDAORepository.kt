@@ -62,7 +62,7 @@ class MainPageDAORepository {
     fun loadCampaign():MutableLiveData<ArrayList<Campaigns>>{
         val campaign1=Campaigns("1","Avva",R.drawable.avva)
         val campaign2=Campaigns("1","Altınyıldız",R.drawable.altinyildiz)
-        val campaign3=Campaigns("1","Beymen",R.drawable.beymen_club)
+        val campaign3=Campaigns("1","Beymen ",R.drawable.beymen_club)
         val campaign4=Campaigns("1","Gece Kuşu", R.drawable.gece_kusu)
 
         val campaignsList=ArrayList<Campaigns>()

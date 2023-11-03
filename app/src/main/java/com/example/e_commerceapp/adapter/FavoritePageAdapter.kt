@@ -26,7 +26,7 @@ class FavoritePageAdapter (var context: Context,var favoriList: List<Product>):
     override fun onBindViewHolder(holder: FavoritePageVH, position: Int) {
         val binding=holder.binding
         val product=favoriList.get(position)
-        binding.productImage.setImageResource(product.product_imag!!)
+//        binding.productImage.setImageResource(product.product_imag!!)
         binding.productPrice.setText(product.product_price!!)
         binding.productName.setText(product.product_name)
         binding.buttonAddCart.setOnClickListener {

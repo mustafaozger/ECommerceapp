@@ -24,19 +24,20 @@ class CartPage : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding=FragmentCartPageBinding.inflate(layoutInflater,container,false)
-        val product1= Product("zagori",21,null, R.drawable.formatwebp)
-        val product2= Product("SADasd",21,null, R.drawable.formatwebp_2)
-        val product3= Product("XIAOMI",21,null, R.drawable.formatwebp_3)
-        val product4= Product("AVVA",21,null, R.drawable.formatwebp_4)
-        val tempList=ArrayList<CartList>()
-        tempList.add(CartList(product1,2))
-        tempList.add(CartList(product2,4))
-        tempList.add(CartList(product3,1))
-        tempList.add(CartList(product4,7))
+//        val product1= Product("zagori",21,null, R.drawable.formatwebp)
+//        val product2= Product("SADasd",21,null, R.drawable.formatwebp_2)
+//        val product3= Product("XIAOMI",21,null, R.drawable.formatwebp_3)
+//        val product4= Product("AVVA",21,null, R.drawable.formatwebp_4)
+//        val tempList=ArrayList<CartList>()
+//        tempList.add(CartList(product1,2))
+//        tempList.add(CartList(product2,4))
+//        tempList.add(CartList(product3,1))
+//        tempList.add(CartList(product4,7))
 
-        val adapter=CartPageAdapter(requireContext(),tempList,resources)
-        binding.cartRcycler.layoutManager=LinearLayoutManager(requireContext())
-        binding.cartRcycler.adapter=adapter
+
+//        val adapter=CartPageAdapter(requireContext(),tempList,resources)
+//        binding.cartRcycler.layoutManager=LinearLayoutManager(requireContext())
+//        binding.cartRcycler.adapter=adapter
 
         // Inflate the layout for this fragment
         return binding.root
