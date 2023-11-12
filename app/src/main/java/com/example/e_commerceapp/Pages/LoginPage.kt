@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.navigation.Navigation
 import com.example.e_commerceapp.R
 import com.example.e_commerceapp.databinding.FragmentLoginPageBinding
+import com.example.e_commerceapp.viewmodel.CartPageViewModel
 import com.example.e_commerceapp.viewmodel.ProfilePageViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -21,6 +22,7 @@ class LoginPage : Fragment() {
     lateinit var binding:FragmentLoginPageBinding
     lateinit var auth:FirebaseAuth
     lateinit var profileViewModel:ProfilePageViewModel
+    var cartPage=CartPageViewModel()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,7 +30,7 @@ class LoginPage : Fragment() {
         binding=FragmentLoginPageBinding.inflate(layoutInflater)
         auth= FirebaseAuth.getInstance()
         profileViewModel= ProfilePageViewModel()
-auth.createUserWithEmailAndPassword("dsfds","dsadsa")
+
 
         binding.signInButton.setOnClickListener{
 

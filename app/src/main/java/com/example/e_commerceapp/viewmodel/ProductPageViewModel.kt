@@ -12,4 +12,6 @@ class ProductPageViewModel:ViewModel() {
         return productDao.getProductList()
     }
 
+
+
 }

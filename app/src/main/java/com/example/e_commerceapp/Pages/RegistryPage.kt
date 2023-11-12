@@ -10,19 +10,24 @@ import android.widget.Toast
 import androidx.navigation.Navigation
 import com.example.e_commerceapp.R
 import com.example.e_commerceapp.databinding.FragmentRegistryPageBinding
+import com.example.e_commerceapp.repo.CartPageDAORepository
+import com.example.e_commerceapp.viewmodel.CartPageViewModel
+import com.example.e_commerceapp.viewmodel.ProfilePageViewModel
 import com.google.firebase.auth.FirebaseAuth
 
 
 class RegistryPage : Fragment() {
     lateinit var auth: FirebaseAuth
     lateinit var binding:FragmentRegistryPageBinding
+    lateinit var profilePageVM:ProfilePageViewModel
+    val cartPageDAORepository=CartPageViewModel()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding=FragmentRegistryPageBinding.inflate(layoutInflater,container,false)
         auth=FirebaseAuth.getInstance()
-
+        profilePageVM= ProfilePageViewModel()
 
 
 
@@ -36,11 +41,14 @@ class RegistryPage : Fragment() {
                     auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener {
                         if(it.isSuccessful){
                             Navigation.findNavController(requireView()).navigate(R.id.action_registryPage_to_loginPage)
-
+                            profilePageVM.setUid(auth.uid.toString())
+                            profilePageVM.createDatabase()
+              //              cartPageDAORepository.getCartList(auth.uid.toString())
                         }else{
                             Toast.makeText(requireContext(),it.exception.toString(),Toast.LENGTH_LONG).show()
                         }
                     }
+
 
                 }else{
                     Toast.makeText(requireContext(),"Passwords not match",Toast.LENGTH_LONG).show()
@@ -48,6 +56,7 @@ class RegistryPage : Fragment() {
             }else{
                 Toast.makeText(requireContext(),"Fields are Empty",Toast.LENGTH_LONG).show()
             }
+
 
         }
 

@@ -13,10 +13,12 @@ import com.example.e_commerceapp.Classes.Product
 import com.example.e_commerceapp.R
 
 import com.example.e_commerceapp.databinding.DesignProductListBinding
+import com.example.e_commerceapp.viewmodel.CartPageViewModel
+import com.example.e_commerceapp.viewmodel.ProductPageViewModel
 import com.squareup.picasso.Picasso
 import kotlin.math.log
 
-class ProductPageAdapter(var context: Context,var productList: List<Product>,var resources: Resources):
+class ProductPageAdapter(var context: Context,var productList: List<Product>):
     RecyclerView.Adapter<ProductPageAdapter.ProductPageVH>() {
     inner class ProductPageVH(var binding: DesignProductListBinding):RecyclerView.ViewHolder(binding.root)
 
@@ -33,7 +35,7 @@ class ProductPageAdapter(var context: Context,var productList: List<Product>,var
     override fun onBindViewHolder(holder: ProductPageVH, position: Int) {
         val binding=holder.binding
         val product=productList.get(position)
-
+        val cartPageViewModel=CartPageViewModel()
         product.product_image?.let { Log.d("hatamUrl", it) }
         Picasso.get().load(product.product_image).resize(450,450)
             .placeholder(R.drawable.product_loading_photo)
@@ -43,8 +45,7 @@ class ProductPageAdapter(var context: Context,var productList: List<Product>,var
         binding.productPagePrice.setText(product.product_price.toString())
 
         binding.addCartButton.setOnClickListener {
-
-
+            product.product_id?.let { it1 -> cartPageViewModel.addCart(it1,1) }
         }
     }
 

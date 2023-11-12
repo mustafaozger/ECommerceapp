@@ -12,4 +12,7 @@ class ProfilePageViewModel:ViewModel() {
     fun setUid(newUid:String){
         profileDAORepository.setUId(newUid)
     }
+    fun createDatabase(){
+        profileDAORepository.createDatabase()
+    }
 }

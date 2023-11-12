@@ -18,9 +18,7 @@ import com.example.e_commerceapp.viewmodel.ProductPageViewModel
 class ProductPage : Fragment() {
     private lateinit var spinnerPriceSortList:ArrayList<String>
     private lateinit var spinnerPriceSortAdapter:ArrayAdapter<String>
-
     private lateinit var spinnerFilterAdapter:ArrayAdapter<String>
-
     lateinit var binding:FragmentProductPageBinding
     lateinit var productPageViewModel:ProductPageViewModel
 
@@ -39,9 +37,9 @@ class ProductPage : Fragment() {
 
         productPageViewModel.getProductList().observe(viewLifecycleOwner) {
 
-            Log.d("hatam",it.toString()+"dsa")
-            val adapter = ProductPageAdapter(requireContext(), it, resources )
+            val adapter = ProductPageAdapter(requireContext(), it )
             binding.productPageRecycler.adapter = adapter
+
         }
 
         spinnerPriceSortList=getSortSpinnerList()

@@ -5,14 +5,17 @@ import android.content.Context
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.e_commerceapp.Classes.CartList
 import com.example.e_commerceapp.Classes.Product
+import com.example.e_commerceapp.R
 import com.example.e_commerceapp.databinding.DesignCartBinding
+import com.squareup.picasso.Picasso
 
-class CartPageAdapter(var context: Context,var cartList: ArrayList<CartList>,var resources: Resources):
+class CartPageAdapter(var context: Context,var cartList: ArrayList<CartList>?):
     RecyclerView.Adapter<CartPageAdapter.CartPageVH>() {
     inner class CartPageVH(var bindng:DesignCartBinding):RecyclerView.ViewHolder(bindng.root)
 
@@ -23,59 +26,64 @@ class CartPageAdapter(var context: Context,var cartList: ArrayList<CartList>,var
     }
 
     override fun getItemCount(): Int {
-        return cartList.size
+        return cartList?.size ?: 0
     }
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: CartPageVH, position: Int) {
         val binding=holder.bindng
-        val product=cartList.get(position).product
+        val product=cartList?.get(position)?.product
 
-        binding.cartProductCount.text=cartList.get(position).productCount.toString()
+        binding.cartProductCount.text=cartList?.get(position)?.productCount.toString()
 //        val image=reSizePhoto(product!!.product_imag!!)
 //        binding.cartPrdctImage.setImageBitmap(image)
-        if (product != null) {
-            binding.cartTotalPrice.setText((cartList.get(position).productCount!! * product.product_price!!).toString())
-        }
-        if (product != null) {
+
+        if (product != null && cartList!=null) {
+            val total_price = (cartList?.get(position)?.productCount!! * product.product_price!!)
+            binding.cartTotalPrice.setText(total_price.toString())
             binding.cartPrductName.setText(product.product_name)
-        }
 
-        binding.cartAddProduct.setOnClickListener {
+            binding.cartAddProduct.setOnClickListener {
 
-            binding.cartProductCount.text=(binding.cartProductCount.text.toString().toInt()+1).toString()
-            if (product != null) {
+                binding.cartProductCount.text=(binding.cartProductCount.text.toString().toInt()+1).toString()
+
                 binding.cartTotalPrice.text=(product.product_price!! *binding.cartProductCount.text.toString().toInt()).toString()
+
+
             }
 
-        }
 
-        binding.cartMinusProdut.setOnClickListener {
-            if(binding.cartProductCount.text.toString().toInt()>0){
-                binding.cartProductCount.text=(binding.cartProductCount.text.toString().toInt()-1).toString()
-                if (product != null) {
+            binding.cartMinusProdut.setOnClickListener {
+                if(binding.cartProductCount.text.toString().toInt()>0){
+                    binding.cartProductCount.text=(binding.cartProductCount.text.toString().toInt()-1).toString()
                     binding.cartTotalPrice.text=(product.product_price!! *binding.cartProductCount.text.toString().toInt()).toString()
                 }
+
+            }
+
+            binding.cartRemove.setOnClickListener {
+                cartList?.remove(cartList?.get(position))
             }
 
         }
 
-        binding.cartRemove.setOnClickListener {
-            cartList.remove(cartList.get(position))
-        }
+
+
+
+
+
+//        try {
+//
+//            Picasso.get().load(product?.product_image).resize(350,350)
+//                .placeholder(R.drawable.product_loading_photo)
+//                .into(binding.cartPrdctImage)
+//        }catch (e:Exception){
+//            Log.e("benimhatam",e.toString())
+//        }
 
     }
 
-    private fun reSizePhoto(image:Int): Bitmap {
-        val options= BitmapFactory.Options()
-        options.inMutable=true
-        val imageBitmap= BitmapFactory.decodeResource(resources, image,options)
 
-        val newWidth = 450 // Yeni genişlik
-        val newHeight = 450 // Yeni yükseklik
-        val resizedBitmap = Bitmap.createScaledBitmap(imageBitmap, newWidth, newHeight, true)
-        return resizedBitmap
-    }
 
 
 }
