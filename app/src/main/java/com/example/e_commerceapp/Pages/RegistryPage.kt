@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.example.e_commerceapp.R
 import com.example.e_commerceapp.databinding.FragmentRegistryPageBinding
@@ -14,20 +15,31 @@ import com.example.e_commerceapp.repo.CartPageDAORepository
 import com.example.e_commerceapp.viewmodel.CartPageViewModel
 import com.example.e_commerceapp.viewmodel.ProfilePageViewModel
 import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class RegistryPage : Fragment() {
     lateinit var auth: FirebaseAuth
     lateinit var binding:FragmentRegistryPageBinding
     lateinit var profilePageVM:ProfilePageViewModel
-    val cartPageDAORepository=CartPageViewModel()
+    lateinit var cartPageDAORepository:CartPageViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val temp:CartPageViewModel by viewModels()
+        cartPageDAORepository=temp
+        val tempProfil:ProfilePageViewModel by viewModels()
+        profilePageVM=tempProfil
+
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding=FragmentRegistryPageBinding.inflate(layoutInflater,container,false)
         auth=FirebaseAuth.getInstance()
-        profilePageVM= ProfilePageViewModel()
+
 
 
 

@@ -1,8 +1,12 @@
 package com.example.e_commerceapp.repo
 
 import android.util.Log
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.example.e_commerceapp.Classes.CartList
 import com.example.e_commerceapp.Classes.Product
 import com.example.e_commerceapp.Classes.User
@@ -19,8 +23,10 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.firestore
 import com.google.firebase.firestore.toObject
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.runBlocking
 import java.util.EventListener
+
 
 class CartPageDAORepository {
 
@@ -28,15 +34,16 @@ class CartPageDAORepository {
     private val db=Firebase.firestore
 
     private var cartList=MutableLiveData<ArrayList<CartList>?>()
-    private var profilePageViewModel=ProfilePageViewModel()
-    fun getList(): MutableLiveData<ArrayList<CartList>?> {
+
+
+    fun getList(productVM:ProductPageViewModel): MutableLiveData<ArrayList<CartList>?> {
 
         runBlocking {
-            getListFromDatabase()
+            getListFromDatabase(productVM)
         }
         return cartList
     }
-    private fun getListFromDatabase(){
+    private fun getListFromDatabase( productVM:ProductPageViewModel ){
         try {
             val uid=ProfileDAORepository.UID
             Log.d("cartList","first list has"+ cartList.value.toString())
@@ -58,7 +65,7 @@ class CartPageDAORepository {
                                 for (item in newCartList) {
                                     val productID = item["product_id"] as String
                                     val cartCount = (item["cart_count"] as Long).toInt() // Firestore'da cart_count Long türünde olabilir
-                                    val prdouct =ProductPageDAORepository.getProductWithId(productID)
+                                    val prdouct =productVM.getProductWithId(productID)
 
                                     retCartList.add(CartList(prdouct,cartCount))
                                     Log.d("cartList", "product:   $prdouct")
@@ -94,7 +101,7 @@ class CartPageDAORepository {
         }catch (e:Exception){
         }
     }
-    fun addCart(product_id:String,count:Int,){
+    fun addCart(product_id:String,count:Int,profilePageViewModel:ProfilePageViewModel){
         try {
             val uid=profilePageViewModel.getUid()
             val userRef = db.collection("Users").document(uid!!)

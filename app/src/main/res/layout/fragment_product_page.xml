@@ -20,7 +20,7 @@
             android:background="@drawable/searchview_background"
             android:iconifiedByDefault="false"
             android:queryBackground="@android:color/transparent"
-            android:queryHint="Morhipo'da ara"
+            android:queryHint="Uygulamada Ara"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"

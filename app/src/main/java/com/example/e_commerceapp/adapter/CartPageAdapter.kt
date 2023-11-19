@@ -8,16 +8,22 @@ import android.graphics.BitmapFactory
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.e_commerceapp.Classes.CartList
 import com.example.e_commerceapp.Classes.Product
+import com.example.e_commerceapp.CompanionClasses.TotalPrice
 import com.example.e_commerceapp.R
 import com.example.e_commerceapp.databinding.DesignCartBinding
 import com.squareup.picasso.Picasso
 
 class CartPageAdapter(var context: Context,var cartList: ArrayList<CartList>?):
     RecyclerView.Adapter<CartPageAdapter.CartPageVH>() {
-    inner class CartPageVH(var bindng:DesignCartBinding):RecyclerView.ViewHolder(bindng.root)
+
+    inner class CartPageVH(var bindng:DesignCartBinding):RecyclerView.ViewHolder(bindng.root){
+
+
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartPageVH {
         val layoutInflater=LayoutInflater.from(context)
@@ -35,14 +41,19 @@ class CartPageAdapter(var context: Context,var cartList: ArrayList<CartList>?):
         val product=cartList?.get(position)?.product
 
         binding.cartProductCount.text=cartList?.get(position)?.productCount.toString()
-//        val image=reSizePhoto(product!!.product_imag!!)
-//        binding.cartPrdctImage.setImageBitmap(image)
 
         if (product != null && cartList!=null) {
             val total_price = (cartList?.get(position)?.productCount!! * product.product_price!!)
             binding.cartTotalPrice.setText(total_price.toString())
             binding.cartPrductName.setText(product.product_name)
 
+            Picasso.get().load(product.product_image)
+                .resize(350,350)
+                .into(binding.cartPrdctImage)
+            Log.d("totalim",total_price.toString())
+            TotalPrice.TOTALPRICE += total_price
+            tot+=total_price
+            //TODO total price i düzelt
             binding.cartAddProduct.setOnClickListener {
 
                 binding.cartProductCount.text=(binding.cartProductCount.text.toString().toInt()+1).toString()
@@ -65,22 +76,15 @@ class CartPageAdapter(var context: Context,var cartList: ArrayList<CartList>?):
                 cartList?.remove(cartList?.get(position))
             }
 
+
+
         }
 
 
 
-
-
-
-//        try {
-//
-//            Picasso.get().load(product?.product_image).resize(350,350)
-//                .placeholder(R.drawable.product_loading_photo)
-//                .into(binding.cartPrdctImage)
-//        }catch (e:Exception){
-//            Log.e("benimhatam",e.toString())
-//        }
-
+    }
+    companion object{
+        var tot=0
     }
 
 

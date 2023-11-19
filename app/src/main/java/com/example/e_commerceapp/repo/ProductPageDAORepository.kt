@@ -53,7 +53,7 @@ class ProductPageDAORepository {
                         }
                     }
                     productList.value = returnedList
-                    ProductPageDAORepository.productList.value=returnedList
+
                 }
 
                 override fun onCancelled(error: DatabaseError) {
@@ -69,8 +69,8 @@ class ProductPageDAORepository {
 
 
 
-    companion object{
-        var productList=MutableLiveData<ArrayList<Product>>()
+
+
         fun getProductWithId(product_id: String):Product{
             try {
                 Log.d("yeniDa","co "+ productList.value.toString())
@@ -88,7 +88,7 @@ class ProductPageDAORepository {
             }
             return Product()
         }
-    }
+
 
 
 

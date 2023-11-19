@@ -21,16 +21,20 @@ import com.example.e_commerceapp.Pages.MainPage
 import com.example.e_commerceapp.Pages.ProfilePage
 import com.example.e_commerceapp.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     lateinit var binding:ActivityMainBinding
     lateinit var  bottomNavigationView: BottomNavigationView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        try {
 
-           binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+
+            super.onCreate(savedInstanceState)
+            binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
 
 
@@ -69,15 +73,9 @@ class MainActivity : AppCompatActivity() {
 //        }
 
 
-
-
-
-
-
-
-
-
-
+        }catch (e:Exception){
+            Log.e("benimzortlamam",e.toString())
+        }
 
     }
 

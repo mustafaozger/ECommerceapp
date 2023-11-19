@@ -21,8 +21,9 @@ import com.example.e_commerceapp.databinding.FragmentMainPageBinding
 import com.example.e_commerceapp.databinding.MainPageBannerDesignBinding
 import com.example.e_commerceapp.viewmodel.MainPageViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class MainPage : Fragment() {
     private lateinit var mainPageViewModel:MainPageViewModel
     lateinit var binding: FragmentMainPageBinding

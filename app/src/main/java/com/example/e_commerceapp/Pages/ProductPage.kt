@@ -1,7 +1,6 @@
 package com.example.e_commerceapp.Pages
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,12 +8,14 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.example.e_commerceapp.R
 import com.example.e_commerceapp.adapter.ProductPageAdapter
 import com.example.e_commerceapp.databinding.FragmentProductPageBinding
+import com.example.e_commerceapp.viewmodel.CartPageViewModel
 import com.example.e_commerceapp.viewmodel.ProductPageViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class ProductPage : Fragment() {
     private lateinit var spinnerPriceSortList:ArrayList<String>
     private lateinit var spinnerPriceSortAdapter:ArrayAdapter<String>
@@ -24,8 +25,9 @@ class ProductPage : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val temp:ProductPageViewModel by viewModels()
-        productPageViewModel=temp
+        val tempProductpage:ProductPageViewModel by viewModels()
+        productPageViewModel=tempProductpage
+
     }
 
 
@@ -37,7 +39,7 @@ class ProductPage : Fragment() {
 
         productPageViewModel.getProductList().observe(viewLifecycleOwner) {
 
-            val adapter = ProductPageAdapter(requireContext(), it )
+            val adapter = ProductPageAdapter(requireContext(), it ,this)
             binding.productPageRecycler.adapter = adapter
 
         }

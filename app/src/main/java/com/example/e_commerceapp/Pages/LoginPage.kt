@@ -7,29 +7,50 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.example.e_commerceapp.R
 import com.example.e_commerceapp.databinding.FragmentLoginPageBinding
+import com.example.e_commerceapp.repo.CartPageDAORepository
 import com.example.e_commerceapp.viewmodel.CartPageViewModel
 import com.example.e_commerceapp.viewmodel.ProfilePageViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class LoginPage : Fragment() {
     lateinit var binding:FragmentLoginPageBinding
     lateinit var auth:FirebaseAuth
     lateinit var profileViewModel:ProfilePageViewModel
-    var cartPage=CartPageViewModel()
+    lateinit var cartPage:CartPageViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        try{
+            val tempCart:CartPageViewModel by viewModels()
+            cartPage= tempCart
+            val tempProfilePage:ProfilePageViewModel by viewModels()
+            profileViewModel=tempProfilePage
+
+        }catch (e:Exception){
+            Log.e("sıcıs",e.message.toString())
+        }
+    }
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        try {
+
+
         binding=FragmentLoginPageBinding.inflate(layoutInflater)
         auth= FirebaseAuth.getInstance()
-        profileViewModel= ProfilePageViewModel()
+
 
 
         binding.signInButton.setOnClickListener{
@@ -52,8 +73,12 @@ class LoginPage : Fragment() {
         binding.textView.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.action_loginPage_to_registryPage)
         }
-
+            return binding.root
         // Inflate the layout for this fragment
+
+        }catch (e:Exception){
+            Log.e("sıcısım","OnCreate"+e.toString())
+        }
         return binding.root
     }
 

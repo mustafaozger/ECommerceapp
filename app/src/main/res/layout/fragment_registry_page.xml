@@ -10,8 +10,31 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/signup_screen">
+        android:background="@drawable/login_screen">
 
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="398dp"
+            android:layout_height="451dp"
+            android:layout_marginEnd="-10dp"
+            app:layout_constraintBottom_toTopOf="@+id/emailLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.695"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/logom" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="160dp"
+            android:text="Kolay Alışverişin Tek Adresi"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/emailLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/emailLayout"
@@ -32,7 +55,7 @@
                 style="@style/Theme.LoginAndSignUp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Type your Email"
+                android:hint="E-posta"
                 android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -56,7 +79,7 @@
                 style="@style/Theme.LoginAndSignUp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Type Your Password"
+                android:hint="Şifre"
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -80,7 +103,7 @@
                 style="@style/Theme.LoginAndSignUp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Retype Your Password"
+                android:hint="Şifreyi tekrar girin"
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -90,7 +113,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:background="@color/yellow"
-            android:text="Sign Up"
+            android:text="Kayıt ol"
             android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -103,8 +126,8 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Zaten Üye misiniz? , Giriş Yap !"
             android:textColor="@color/black"
-            android:text="Already Registered , Sign In !"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
