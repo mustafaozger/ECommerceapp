@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_toEndOf="@+id/imageView8"
+                android:layout_toEndOf="@+id/favorite_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +40,7 @@
                 />
 
             <ImageView
-                android:id="@+id/imageView8"
+                android:id="@+id/favorite_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

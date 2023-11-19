@@ -69,6 +69,10 @@ class ProductPageAdapter(var context: Context,var productList: List<Product> ,va
             Toast.makeText(context,"Sepete Eklendi",Toast.LENGTH_LONG).show()
             product.product_id?.let { it1 -> holder.cartPageViewModel.addCart(it1,1,holder.profilePageViewModel) }
         }
+
+        if(product.isFavorite==true){
+            binding.favoriteButton.setImageResource(R.drawable.baseline_favorite_24)
+        }
     }
 
 //

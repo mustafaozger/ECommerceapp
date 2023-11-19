@@ -16,38 +16,44 @@
 
         <ImageView
             android:id="@+id/product_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_width="136dp"
+            android:layout_height="141dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
             android:layout_weight="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/bayram_indirim" />
 
         <TextView
             android:id="@+id/product_name"
-            android:layout_width="wrap_content"
+            android:layout_width="146dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="68dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="32dp"
             android:text="TextView"
-            android:textSize="30sp"
+            android:textSize="25sp"
             app:layout_constraintStart_toEndOf="@+id/product_image"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-
-            android:id="@+id/button_favorite"
+            android:id="@+id/favorite_button2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="192dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="28dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/favoritedesign"
+            android:padding="10dp"
+            android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/product_image"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/outline_favorite_border_24" />
+            app:srcCompat="@drawable/baseline_favorite_24" />
 
         <TextView
             android:id="@+id/product_price"
@@ -64,11 +70,12 @@
             android:id="@+id/button_add_cart"
             android:layout_width="130dp"
             android:layout_height="48dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginStart="24dp"
             android:text="Sepete Ekle"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/product_price"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.863" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

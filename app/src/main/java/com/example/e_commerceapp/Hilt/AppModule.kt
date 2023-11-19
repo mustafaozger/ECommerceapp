@@ -1,6 +1,7 @@
 package com.example.e_commerceapp.Hilt
 
 import com.example.e_commerceapp.repo.CartPageDAORepository
+import com.example.e_commerceapp.repo.FavoritePageDAORepository
 import com.example.e_commerceapp.repo.MainPageDAORepository
 import com.example.e_commerceapp.repo.ProductPageDAORepository
 import com.example.e_commerceapp.repo.ProfileDAORepository
@@ -38,5 +39,11 @@ class AppModule {
     @Provides
     fun provideMainPageDAORepository():MainPageDAORepository{
         return MainPageDAORepository()
+    }
+
+    @Singleton
+    @Provides
+    fun provideFavoritePage():FavoritePageDAORepository{
+        return FavoritePageDAORepository()
     }
 }

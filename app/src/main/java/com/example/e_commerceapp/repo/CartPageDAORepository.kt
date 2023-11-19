@@ -46,19 +46,15 @@ class CartPageDAORepository {
     private fun getListFromDatabase( productVM:ProductPageViewModel ){
         try {
             val uid=ProfileDAORepository.UID
-            Log.d("cartList","first list has"+ cartList.value.toString())
 
             if (uid != null) {
-                Log.d("cartList","uid has"+ uid.toString())
 
                 db.collection("Users").document(uid).get().addOnSuccessListener { documentSnapshot->
-                    Log.d("cartList","documentSnapshot has"+ documentSnapshot.data.toString())
 
                     if(documentSnapshot.exists()){
                         val userData = documentSnapshot.data
 
                         if (userData != null) {
-                            Log.d("cartList","userData:   "+userData["cart_list"].toString())
                             val newCartList = userData["cart_list"] as List<Map<String, Any>>?
                             val retCartList=ArrayList<CartList>()
                             if (newCartList != null) {

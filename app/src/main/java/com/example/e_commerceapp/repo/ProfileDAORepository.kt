@@ -41,7 +41,7 @@ class ProfileDAORepository {
     }
 
     companion object{
-        var UID=""
+        var UID:String?=null//when user login , UID  change
     }
 
 
