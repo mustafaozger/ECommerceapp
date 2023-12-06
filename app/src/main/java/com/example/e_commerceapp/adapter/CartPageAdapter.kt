@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.e_commerceapp.Classes.CartList
@@ -15,13 +16,14 @@ import com.example.e_commerceapp.Classes.Product
 import com.example.e_commerceapp.CompanionClasses.TotalPrice
 import com.example.e_commerceapp.R
 import com.example.e_commerceapp.databinding.DesignCartBinding
+import com.example.e_commerceapp.viewmodel.CartPageViewModel
+import com.example.e_commerceapp.viewmodel.ProductPageViewModel
 import com.squareup.picasso.Picasso
 
-class CartPageAdapter(var context: Context,var cartList: ArrayList<CartList>?):
+class CartPageAdapter(var context: Context,var cartList: ArrayList<CartList>?,var cartPageVM:CartPageViewModel,var productPageViewModel: ProductPageViewModel):
     RecyclerView.Adapter<CartPageAdapter.CartPageVH>() {
 
     inner class CartPageVH(var bindng:DesignCartBinding):RecyclerView.ViewHolder(bindng.root){
-
 
     }
 
@@ -37,6 +39,7 @@ class CartPageAdapter(var context: Context,var cartList: ArrayList<CartList>?):
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: CartPageVH, position: Int) {
+        Log.d("hatamCartAdapterList",cartList?.get(position)?.product.toString())
         val binding=holder.bindng
         val product=cartList?.get(position)?.product
 
@@ -57,34 +60,38 @@ class CartPageAdapter(var context: Context,var cartList: ArrayList<CartList>?):
             binding.cartAddProduct.setOnClickListener {
 
                 binding.cartProductCount.text=(binding.cartProductCount.text.toString().toInt()+1).toString()
-
                 binding.cartTotalPrice.text=(product.product_price!! *binding.cartProductCount.text.toString().toInt()).toString()
-
+                changeCartProductCount(product.product_id.toString(),1)
 
             }
 
 
             binding.cartMinusProdut.setOnClickListener {
-                if(binding.cartProductCount.text.toString().toInt()>0){
+                if(binding.cartProductCount.text.toString().toInt()>1){
+
                     binding.cartProductCount.text=(binding.cartProductCount.text.toString().toInt()-1).toString()
                     binding.cartTotalPrice.text=(product.product_price!! *binding.cartProductCount.text.toString().toInt()).toString()
-                }
+                    changeCartProductCount(product.product_id.toString(),-1)
+                }else{
+                    Toast.makeText(context,"product deleted",Toast.LENGTH_LONG).show()
+                    cartPageVM.removeProductFromCart(productPageViewModel,product.product_id.toString() )
+                    cartList?.remove(cartList?.get(position))                }
 
             }
 
             binding.cartRemove.setOnClickListener {
+                cartPageVM.removeProductFromCart(productPageViewModel,product.product_id.toString() )
                 cartList?.remove(cartList?.get(position))
             }
-
-
-
         }
-
-
 
     }
     companion object{
         var tot=0
+    }
+
+    fun changeCartProductCount(product_id:String,changeAmount:Int){
+        cartPageVM.changeCartProductCount(product_id,changeAmount)
     }
 
 

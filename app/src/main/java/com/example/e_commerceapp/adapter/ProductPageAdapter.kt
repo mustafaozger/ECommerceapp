@@ -67,7 +67,7 @@ class ProductPageAdapter(var context: Context,var productList: List<Product> ,va
         binding.addCartButton.setOnClickListener {
             Log.d("cartpage","eklendi")
             Toast.makeText(context,"Sepete Eklendi",Toast.LENGTH_LONG).show()
-            product.product_id?.let { it1 -> holder.cartPageViewModel.addCart(it1,1,holder.profilePageViewModel) }
+            product.product_id?.let { it1 -> holder.cartPageViewModel.addCart(it1,1) }
         }
 
         if(product.isFavorite==true){

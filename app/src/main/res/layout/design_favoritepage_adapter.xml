@@ -70,10 +70,12 @@
             android:id="@+id/button_add_cart"
             android:layout_width="130dp"
             android:layout_height="48dp"
-            android:layout_marginStart="24dp"
+            android:layout_marginEnd="5dp"
+            android:backgroundTint="@color/yellow"
             android:text="Sepete Ekle"
+            android:textColor="#000000"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/product_price"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.863" />
 

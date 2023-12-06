@@ -14,7 +14,7 @@
 
         <ImageView
 
-            android:id="@+id/banner_image"
+            android:id="@+id/bannerImage"
             android:layout_width="match_parent"
             android:layout_height="210dp"
             app:srcCompat="@drawable/banner2" />

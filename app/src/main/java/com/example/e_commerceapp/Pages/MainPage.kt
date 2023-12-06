@@ -46,7 +46,7 @@ class MainPage : Fragment() {
 
               Log.e("hatam","sss: "+mainPageViewModel.getBanner().value.toString()+"")
               mainPageViewModel.getBanner().observe(viewLifecycleOwner) {
-                  val bannerAdapter = MainPageBannerAdadpter(requireContext(), it)
+                  val bannerAdapter = MainPageBannerAdadpter(requireContext(), it,requireView())
                   binding.rcylBanner.adapter = bannerAdapter
 
             }

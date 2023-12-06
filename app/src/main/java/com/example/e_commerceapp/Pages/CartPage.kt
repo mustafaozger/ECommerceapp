@@ -1,5 +1,6 @@
 package com.example.e_commerceapp.Pages
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -43,6 +44,7 @@ class CartPage : Fragment() {
 
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -55,7 +57,7 @@ class CartPage : Fragment() {
         cartPageViewModel.getCartList(productPage).observe(viewLifecycleOwner){
             Log.d("cartList",it.toString())
             if(it!=null){
-                val adapter=CartPageAdapter(requireContext(),it)
+                val adapter=CartPageAdapter(requireContext(),it,cartPageViewModel,productPage)
                 binding.cartRcycler.adapter=adapter
                 binding.cartRcycler.adapter?.notifyDataSetChanged()
                 binding.textView.setText(CartPageAdapter.tot.toString())

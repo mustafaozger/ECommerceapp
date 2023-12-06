@@ -14,8 +14,14 @@ class CartPageViewModel @Inject constructor(@SuppressLint("StaticFieldLeak") pri
 
     fun getCartList(productVM:ProductPageViewModel):MutableLiveData<ArrayList<CartList>?>{
         return cartPageDAORepository.getList(productVM)
-    }    fun addCart(product_id:String,count:Int,profilePageViewModel:ProfilePageViewModel){
-        cartPageDAORepository.addCart(product_id,count,profilePageViewModel)
+    }    fun addCart(product_id:String,count:Int){
+        cartPageDAORepository.addCart(product_id,count)
+    }
+    fun changeCartProductCount(product_id:String,changeAmount:Int){
+        cartPageDAORepository.changeCartProductCount(product_id,changeAmount)
+    }
+    fun removeProductFromCart(productVM: ProductPageViewModel, productIdToRemove: String) {
+        cartPageDAORepository.removeProductFromCart(productVM,productIdToRemove)
     }
 
 }
