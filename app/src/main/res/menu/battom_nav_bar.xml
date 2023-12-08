@@ -2,28 +2,28 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/bottomHome"
+        android:id="@+id/mainPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:title=""
         android:icon="@drawable/outline_home_24"
         />
     <item
-        android:id="@+id/bottomFavorite"
+        android:id="@+id/favoritiesPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:title=""
         android:icon="@drawable/outline_favorite_border_24"
         />
     <item
-        android:id="@+id/bottomCart"
+        android:id="@+id/cartPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:title=""
         android:icon="@drawable/outline_add_shopping_cart_24"
         />
     <item
-        android:id="@+id/bottomProfile"
+        android:id="@+id/profilePage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:title=""

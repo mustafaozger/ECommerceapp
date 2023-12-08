@@ -95,7 +95,7 @@ class CartPageDAORepository {
                         val cartItem = newCart_list.find { it["product_id"] == product_id }
 
                         if (cartItem != null) {
-                            val currentCount = cartItem["cart_count"] as Int
+                            val currentCount = (cartItem["cart_count"] as Long).toInt()
                             val updatedCount = currentCount + 1
                             cartItem["cart_count"] = updatedCount
                         } else {

@@ -12,6 +12,8 @@ import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.e_commerceapp.Pages.CartPage
@@ -26,7 +28,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     lateinit var binding:ActivityMainBinding
-    lateinit var  bottomNavigationView: BottomNavigationView
+    private lateinit var navController: NavController
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,43 +37,16 @@ class MainActivity : AppCompatActivity() {
 
 
             super.onCreate(savedInstanceState)
-            binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+            setContentView(R.layout.activity_main)
+
+            val navHostFragment =
+                supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+            navController = navHostFragment.navController
+
+            val bottomNavView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+            bottomNavView.setupWithNavController(navController)
 
 
-
-            bottomNavigationView = findViewById(R.id.bottomNavigationView) as BottomNavigationView
-            bottomNavigationView.setOnItemSelectedListener {
-                when (it.itemId) {
-                    R.id.bottomHome -> {
-                        loadFragment(MainPage())
-                        return@setOnItemSelectedListener true
-                    }
-
-                    R.id.bottomFavorite -> {
-                        loadFragment(FavoritiesPage())
-                        return@setOnItemSelectedListener true
-                    }
-
-                    R.id.bottomCart -> {
-                        loadFragment(CartPage())
-                        return@setOnItemSelectedListener true
-                    }
-
-                    R.id.bottomProfile -> {
-                        loadFragment(ProfilePage())
-                        return@setOnItemSelectedListener true
-                    }
-
-                    else -> {
-                        return@setOnItemSelectedListener true
-                    }
-                }
-            }
-
-//        if(LoginPage()==clas){
-//            binding.bottomNavigationView.visibility=View.INVISIBLE
-//
-//        }
 
 
         }catch (e:Exception){
@@ -78,12 +54,8 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-
-
-    private  fun loadFragment(fragment: Fragment){
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragmentContainerView,fragment)
-        transaction.commit()
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
 
