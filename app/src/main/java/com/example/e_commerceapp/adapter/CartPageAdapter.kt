@@ -53,10 +53,7 @@ class CartPageAdapter(var context: Context,var cartList: ArrayList<CartList>?,va
             Picasso.get().load(product.product_image)
                 .resize(350,350)
                 .into(binding.cartPrdctImage)
-            Log.d("totalim",total_price.toString())
-            TotalPrice.TOTALPRICE += total_price
-            tot+=total_price
-            //TODO total price i düzelt
+
             binding.cartAddProduct.setOnClickListener {
 
                 binding.cartProductCount.text=(binding.cartProductCount.text.toString().toInt()+1).toString()
@@ -85,9 +82,6 @@ class CartPageAdapter(var context: Context,var cartList: ArrayList<CartList>?,va
             }
         }
 
-    }
-    companion object{
-        var tot=0
     }
 
     fun changeCartProductCount(product_id:String,changeAmount:Int){

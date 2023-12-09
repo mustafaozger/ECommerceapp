@@ -1,7 +1,6 @@
 package com.example.e_commerceapp.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.example.e_commerceapp.Hilt.AppModule_ProvideProductPageDAORepositoryFactory
 import com.example.e_commerceapp.repo.ProfileDAORepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

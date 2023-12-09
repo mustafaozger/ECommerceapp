@@ -63,7 +63,7 @@ class ProductPageAdapter(
 
         binding.addCartButton.setOnClickListener {
             Toast.makeText(context,"Sepete Eklendi",Toast.LENGTH_LONG).show()
-            product.product_id?.let { it1 -> holder.cartPageViewModel.addCart(it1,1) }
+            product.product_id?.let { it1 -> holder.cartPageViewModel.changeCartProductCount(it1,1) }
         }
 
 

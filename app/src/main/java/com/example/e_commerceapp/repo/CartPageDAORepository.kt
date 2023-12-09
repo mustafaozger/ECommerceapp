@@ -34,9 +34,6 @@ import java.util.EventListener
 
 class CartPageDAORepository {
 
-
-
-
     private var cartList=MutableLiveData<ArrayList<CartList>?>()
 
 
@@ -80,12 +77,16 @@ class CartPageDAORepository {
             Log.e("hatamFirebaseGetList",e.toString())
         }
     }
-    fun addCart(product_id:String,count:Int){
+    fun changeCartProductCount(product_id:String,count:Int){
         val uid=ProfileDAORepository.UID
         val db=Firebase.firestore
         val dbRef=db.collection("Users")
         val user= uid?.let { dbRef.document(it) }
 
+        //add live data
+        updateProductCount(product_id,count)
+
+        //add database
         try {
             if (user != null) {
                 user.get().addOnSuccessListener { documentSnapshot ->
@@ -96,8 +97,10 @@ class CartPageDAORepository {
 
                         if (cartItem != null) {
                             val currentCount = (cartItem["cart_count"] as Long).toInt()
-                            val updatedCount = currentCount + 1
+                            val updatedCount = currentCount + count
                             cartItem["cart_count"] = updatedCount
+
+
                         } else {
                             val newCartItem = hashMapOf<String, Any>(
                                 "product_id" to product_id,
@@ -122,38 +125,19 @@ class CartPageDAORepository {
         }
     }
 
+    private fun updateProductCount(productId: String, newProductCount: Int) {
+        val currentCartList = cartList.value
+        val cartMap = currentCartList?.associateBy { it.product?.product_id }
 
-
-
-    fun changeCartProductCount(product_id:String,changeAmount:Int){
-        val uid=ProfileDAORepository.UID
-        val db=Firebase.firestore
-        val dbRef=db.collection("Users")
-        val user= uid?.let { dbRef.document(it) }
-        try {
-            if (user != null) {
-                user.get().addOnSuccessListener { documentSnapshot ->
-                    if (documentSnapshot.exists()) {
-                        val userData = documentSnapshot.data
-                        val cart_list = userData?.get("cart_list") as ArrayList<HashMap<String, Any>>
-                        val cartItem = cart_list.find { it["product_id"] == product_id }
-                        if (cartItem != null) {
-                            val currentCount = (cartItem["cart_count"] as Long).toInt()
-                            val updatedCount = currentCount + changeAmount
-                            cartItem["cart_count"] = updatedCount
-                            user.update("cart_list", cart_list)
-                        }
-
-                    }
-
-                }.addOnFailureListener {
-                    Log.d("hatamFirebaseHata", it.toString())
-                }
+        cartMap?.get(productId)?.let { cartItem ->
+            if(cartItem.productCount!! >0){
+                cartItem.productCount = cartItem.productCount?.plus(newProductCount)
+                cartList.postValue(currentCartList)
             }
-        }catch (e:Exception){
-            Log.e("hatamFirebaseHatam","changeCartProduct :  "+e.toString())
+
         }
     }
+
 
 
     fun removeProductFromCart(productVM: ProductPageViewModel, productIdToRemove: String) {

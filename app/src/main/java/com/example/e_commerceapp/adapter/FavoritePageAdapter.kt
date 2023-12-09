@@ -61,6 +61,6 @@ class FavoritePageAdapter (var context: Context,var favoriList: List<FavoriteLis
     }
 
     fun addCart(id:String){
-        cartPageViewModel.addCart(id,1)
+        cartPageViewModel.changeCartProductCount(id,1)
     }
 }

@@ -60,17 +60,29 @@ class CartPage : Fragment() {
                 val adapter=CartPageAdapter(requireContext(),it,cartPageViewModel,productPage)
                 binding.cartRcycler.adapter=adapter
                 binding.cartRcycler.adapter?.notifyDataSetChanged()
-                binding.textView.setText(CartPageAdapter.tot.toString())
+                val totalPrice=calPrice(it)
+                binding.textView.setText("$totalPrice")
+
             }
 
         }
 
 
 
-
-        // Inflate the layout for this fragment
         return binding.root
     }
 
+    fun  calPrice(list :ArrayList<CartList>?):Double{
+       var totalPrice=0.0
+        if (list!=null){
+            for (i in list){
+                val total=i.productCount!! * i.product?.product_price!!
+                Log.d("hatamCartPage","${i.product!!.product_info}  =  $total")
+                totalPrice += (total).toDouble()
+
+            }
+        }
+     return totalPrice
+    }
 
 }
