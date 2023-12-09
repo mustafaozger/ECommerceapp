@@ -7,7 +7,7 @@
 
 
     <fragment
-        android:id="@+id/mainPage"
+        android:id="@+id/mainPag"
         android:name="com.example.e_commerceapp.Pages.MainPage"
         android:label="MainPage" >
         <action
@@ -47,7 +47,7 @@
         android:label="LoginPage" >
         <action
             android:id="@+id/action_loginPage_to_mainPage"
-            app:destination="@id/mainPage" />
+            app:destination="@id/mainPag" />
         <action
             android:id="@+id/action_loginPage_to_registryPage"
             app:destination="@id/registryPage" />

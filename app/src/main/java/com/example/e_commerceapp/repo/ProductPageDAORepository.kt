@@ -20,7 +20,6 @@ import kotlinx.coroutines.runBlocking
 class ProductPageDAORepository {
 
     private var productList:MutableLiveData<ArrayList<Product>>
-    private var firestore=Firebase.firestore
     val db=FirebaseDatabase.getInstance()
 
 

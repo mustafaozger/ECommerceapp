@@ -19,7 +19,9 @@ import com.example.e_commerceapp.adapter.MainPageCampaignLogoAdapter
 import com.example.e_commerceapp.adapter.MainPageCategoryAdapter
 import com.example.e_commerceapp.databinding.FragmentMainPageBinding
 import com.example.e_commerceapp.databinding.MainPageBannerDesignBinding
+import com.example.e_commerceapp.viewmodel.FavoritiesPageViewModel
 import com.example.e_commerceapp.viewmodel.MainPageViewModel
+import com.example.e_commerceapp.viewmodel.ProductPageViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,11 +29,17 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainPage : Fragment() {
     private lateinit var mainPageViewModel:MainPageViewModel
     lateinit var binding: FragmentMainPageBinding
-
+    lateinit var favoritiesPageViewModel: FavoritiesPageViewModel
+    lateinit var productPageViewModel: ProductPageViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val tempViewModel:MainPageViewModel by viewModels()
         mainPageViewModel=tempViewModel
+        val tempFavoritiesPageViewModel:FavoritiesPageViewModel by viewModels()
+        favoritiesPageViewModel=tempFavoritiesPageViewModel
+        val tempProduct:ProductPageViewModel by viewModels()
+        productPageViewModel=tempProduct
+
     }
 
 
@@ -43,8 +51,8 @@ class MainPage : Fragment() {
 
         binding=FragmentMainPageBinding.inflate(layoutInflater,container,false)
         try {
+            favoritiesPageViewModel.initFavoriteList(productPageViewModel)
 
-              Log.e("hatam","sss: "+mainPageViewModel.getBanner().value.toString()+"")
               mainPageViewModel.getBanner().observe(viewLifecycleOwner) {
                   val bannerAdapter = MainPageBannerAdadpter(requireContext(), it,requireView())
                   binding.rcylBanner.adapter = bannerAdapter

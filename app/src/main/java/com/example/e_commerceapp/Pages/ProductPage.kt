@@ -10,7 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.e_commerceapp.adapter.ProductPageAdapter
 import com.example.e_commerceapp.databinding.FragmentProductPageBinding
-import com.example.e_commerceapp.viewmodel.CartPageViewModel
+import com.example.e_commerceapp.viewmodel.FavoritiesPageViewModel
 import com.example.e_commerceapp.viewmodel.ProductPageViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,12 +22,15 @@ class ProductPage : Fragment() {
     private lateinit var spinnerFilterAdapter:ArrayAdapter<String>
     lateinit var binding:FragmentProductPageBinding
     lateinit var productPageViewModel:ProductPageViewModel
+    lateinit var favoritiesPageViewModel: FavoritiesPageViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val tempProductpage:ProductPageViewModel by viewModels()
         productPageViewModel=tempProductpage
 
+        val tempFavoritiesPageViewModel:FavoritiesPageViewModel by viewModels()
+        favoritiesPageViewModel=tempFavoritiesPageViewModel
     }
 
 
@@ -37,10 +40,15 @@ class ProductPage : Fragment() {
     ): View? {
         binding=FragmentProductPageBinding.inflate(layoutInflater,container,false)
 
-        productPageViewModel.getProductList().observe(viewLifecycleOwner) {
 
-            val adapter = ProductPageAdapter(requireContext(), it ,this)
-            binding.productPageRecycler.adapter = adapter
+
+        productPageViewModel.getProductList().observe(viewLifecycleOwner) {productlist->
+
+            favoritiesPageViewModel.getFavoriteList().observe(viewLifecycleOwner){favoirteList->
+                val adapter = ProductPageAdapter(requireContext(), productlist ,this,favoirteList)
+                binding.productPageRecycler.adapter = adapter
+            }
+
 
         }
 

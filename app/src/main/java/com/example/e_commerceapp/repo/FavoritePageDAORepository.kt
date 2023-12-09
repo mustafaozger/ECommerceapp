@@ -1,8 +1,12 @@
 package com.example.e_commerceapp.repo
 
 import android.util.Log
+import android.widget.Toast
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import com.example.e_commerceapp.Classes.FavoriteList
+import com.example.e_commerceapp.viewmodel.ProductPageViewModel
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 import javax.inject.Inject
@@ -14,20 +18,19 @@ class FavoritePageDAORepository  {
     val uid=ProfileDAORepository.UID
 
 
-    fun getFavoriteList(productPageDAORepository: ProductPageDAORepository):MutableLiveData<ArrayList<FavoriteList>>{
-        initFavoriteList(productPageDAORepository)
+    fun getFavoriteList():MutableLiveData<ArrayList<FavoriteList>>{
         return this.favoriteList
     }
 
-    fun addToFavoriteList(product_id: String){
-        addFavoriteList(product_id)
+    fun addToFavoriteList(product_id: String,productPageViewModel: ProductPageViewModel){
+        addFavoriteList(product_id,productPageViewModel)
     }
 
     fun removeFavoriteList(product_id: String){
         removeFromeFavoriteList(product_id)
     }
 
-    private fun initFavoriteList(productPageDAORepository:ProductPageDAORepository){
+     fun initFavoriteList(productPageViewModel: ProductPageViewModel){
         if(uid!=null){
             db.collection("Users").document(uid).get().addOnSuccessListener { documentSnapshot->
                 if(documentSnapshot.exists()){
@@ -38,7 +41,7 @@ class FavoritePageDAORepository  {
                         if(newFavoriteList!=null){
                             for(item in newFavoriteList){
                                 val productId=item.get("product_id") as String
-                                val product=productPageDAORepository.getProductWithId(productId)
+                                val product=productPageViewModel.getProductWithId(productId)
                                 retFavoriteList.add(FavoriteList(product))
                             }
                             favoriteList.value=retFavoriteList
@@ -49,19 +52,23 @@ class FavoritePageDAORepository  {
         }
     }
 
-    private fun addFavoriteList(product_id:String){
+    private fun addFavoriteList(product_id:String,productPageViewModel: ProductPageViewModel){
         if(uid!=null){
+            val product=productPageViewModel.getProductWithId(product_id)
+            favoriteList.value?.add(FavoriteList(product))
+
+            //add database
             val userRef= db.collection("Users").document(uid )
             userRef.get().addOnSuccessListener { documentSnapshot->
                 if(documentSnapshot.exists()){
                     val data=documentSnapshot.data
                     if (data!=null){
-                        val favoriteList= data.get("favorite_list") as ArrayList<Map<String,Any>>
+                        val tempfavoriteList= data.get("favorite_list") as ArrayList<Map<String,Any>>
                         val newProduct= hashMapOf<String,Any>(
                             "product_id" to product_id
                         )
-                        favoriteList.add(newProduct)
-                        userRef.update("favorite_list",favoriteList)
+                        tempfavoriteList.add(newProduct)
+                        userRef.update("favorite_list",tempfavoriteList)
                     }
                 }
             }.addOnFailureListener {
@@ -72,23 +79,37 @@ class FavoritePageDAORepository  {
 
     private fun removeFromeFavoriteList(product_id:String){
         if(uid!=null){
+            //Remove from list
+            favoriteList.value?.remove( favoriteList.value?.find {
+                it.favorite_product?.product_id==product_id
+            }).let {
+                Log.d("hatamFavoriteAdapter","silindi")
+            }
+
+            //Remove from Database
             val userRef= db.collection("Users").document(uid )
             userRef.get().addOnSuccessListener { documentSnapshot->
                 if(documentSnapshot.exists()){
                     val data=documentSnapshot.data
                     if (data!=null){
-                        val favoriteList= data.get("favorite_list") as ArrayList<Map<String,Any>>
+                        val newfavoriteList= data.get("favorite_list") as ArrayList<Map<String,Any>>
                         val newProduct= hashMapOf<String,Any>(
                             "product_id" to product_id
                         )
-                        favoriteList.remove(newProduct)
-                        userRef.update("favorite_list",favoriteList)
+                        newfavoriteList.remove(newProduct)
+                        userRef.update("favorite_list",newfavoriteList)
                     }
                 }
             }.addOnFailureListener {
-                Log.e("DatabaseExceptions",it.toString())
+                Log.e("hatamFavoriteDAO",it.toString())
             }
         }
+    }
+    fun checkIsFavorite(product_id:String):Boolean{
+       val product= favoriteList.value?.find {
+            it.favorite_product?.product_id ==product_id
+        }
+        return product !=null
     }
 
 }
