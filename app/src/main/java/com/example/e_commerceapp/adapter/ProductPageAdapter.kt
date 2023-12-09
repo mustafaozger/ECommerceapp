@@ -67,9 +67,9 @@ class ProductPageAdapter(
         }
 
 
-        checkIsFavorite(product.product_id.toString(),favoriLis)
 
-        val isFavorite:Boolean=holder.favoritiesPageViewModel.checkIsFavorite(product.product_id.toString())
+
+        var isFavorite=checkIsFavorite(product.product_id.toString(),favoriLis)
 
 
 
@@ -77,12 +77,13 @@ class ProductPageAdapter(
             binding.favoriteButton.setImageResource(R.drawable.baseline_favorite_24)
         }
         binding.favoriteButton.setOnClickListener{
-            if(isFavorite==true || binding.favoriteButton.drawable==R.drawable.baseline_favorite_24.toDrawable()) {
-
+            if(isFavorite==true ){
+                isFavorite=false
                 binding.favoriteButton.setImageResource(R.drawable.outline_favorite_border_24)
                 holder.favoritiesPageViewModel.removeFromFavoriteList(product.product_id.toString())
                 Toast.makeText(context,"Favorilerden Çıkarıldı",Toast.LENGTH_LONG).show()
             }else{
+                isFavorite=true
                 binding.favoriteButton.setImageResource(R.drawable.baseline_favorite_24)
                 holder.favoritiesPageViewModel.addFavoriteList(product.product_id.toString(),holder.productPageViewModel)
                 Toast.makeText(context,"Favorilere Eklendi",Toast.LENGTH_LONG).show()
