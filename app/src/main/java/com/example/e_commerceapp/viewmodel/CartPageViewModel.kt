@@ -16,7 +16,8 @@ class CartPageViewModel @Inject constructor(@SuppressLint("StaticFieldLeak") pri
     fun getCartList(productVM:ProductPageViewModel):MutableLiveData<ArrayList<CartList>?>{
         return cartPageDAORepository.getList(productVM)
     }
-    fun changeCartProductCount(product_id:String,changeAmount:Int){
+    fun changeCartProductCount(
+        product_id:String,changeAmount:Int){
         viewModelScope.launch {
             cartPageDAORepository.changeCartProductCount(product_id,changeAmount)
 
