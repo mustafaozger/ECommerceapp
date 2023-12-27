@@ -24,7 +24,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class LoginPage : Fragment() {
     lateinit var binding:FragmentLoginPageBinding
-    lateinit var auth:FirebaseAuth
     lateinit var profileViewModel:ProfilePageViewModel
     lateinit var cartPage:CartPageViewModel
 
@@ -36,8 +35,11 @@ class LoginPage : Fragment() {
             val tempProfilePage:ProfilePageViewModel by viewModels()
             profileViewModel=tempProfilePage
 
+
+
+
         }catch (e:Exception){
-            Log.e("sıcıs",e.message.toString())
+            Log.e("hatam",e.message.toString())
         }
     }
 
@@ -50,41 +52,22 @@ class LoginPage : Fragment() {
 
 
         binding=FragmentLoginPageBinding.inflate(layoutInflater)
-        auth= FirebaseAuth.getInstance()
-
-            //TODO BURAYI SİL
-        auth.signInWithEmailAndPassword("yeni@gmail.com","123456").addOnCompleteListener {
-            ProfileDAORepository.UID=auth.uid
 
 
-            Navigation.findNavController(requireView()).navigate(R.id.action_loginPage_to_mainPage)
+        binding.signInButton.setOnClickListener{
+            profileViewModel.login(binding.loginEmail.text.toString(),binding.loginPassword.text.toString(), isSuccess = {isSuccess->
+                if (isSuccess){
+                    Navigation.findNavController(requireView()).navigate(R.id.action_loginPage_to_mainPage)
+                }
+            }, message = {
+                Toast.makeText(requireContext(),it,Toast.LENGTH_LONG).show()
+            })
         }
 
-
-//
-//
-//            binding.signInButton.setOnClickListener{
-//
-//            if(binding.loginEmail.text.toString()!="" && binding.loginPassword.text.toString()!=""){
-//                    auth.signInWithEmailAndPassword(binding.loginEmail.text.toString(),binding.loginPassword.text.toString()) .addOnCompleteListener{
-//                    if(it.isSuccessful){
-//                        profileViewModel.setUid(auth.uid!!)
-//                        Navigation.findNavController(requireView()).navigate(R.id.action_loginPage_to_mainPage)
-//                    }else{
-//                        Toast.makeText(requireContext(),"E-mail or Password Wrong",Toast.LENGTH_LONG).show()
-//                    }
-//                }
-//            }else{
-//                Toast.makeText(requireContext(),"E-mail or Password Empty",Toast.LENGTH_LONG).show()
-//
-//            }
-//        }
-//
-//        binding.textView.setOnClickListener {
-//            Navigation.findNavController(it).navigate(R.id.action_loginPage_to_registryPage)
-//        }
-//            return binding.root
-//        // Inflate the layout for this fragment
+        binding.textView.setOnClickListener {
+            Navigation.findNavController(it).navigate(R.id.action_loginPage_to_registryPage)
+        }
+            return binding.root
 
         }catch (e:Exception){
             Log.e("sıcısım","OnCreate"+e.toString())
