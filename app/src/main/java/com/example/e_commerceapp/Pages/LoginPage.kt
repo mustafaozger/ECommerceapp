@@ -51,6 +51,7 @@ class LoginPage : Fragment() {
 
 
 
+
         binding.signInButton.setOnClickListener{
             profileViewModel.login(requireContext(),binding.loginEmail.text.toString(),binding.loginPassword.text.toString(), isSuccess = {isSuccess->
                 if (isSuccess){
@@ -64,10 +65,26 @@ class LoginPage : Fragment() {
         binding.textView.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.action_loginPage_to_registryPage)
         }
+
+//            profileViewModel.isLogin(requireContext()){
+//                if (it){
+//                    Log.d("hatamLogin","itWork")
+//                    if(view!=null){
+//                        Navigation.findNavController(requireView()).navigate(R.id.action_loginPage_to_mainPage)
+//                    }else{
+//                        Log.d("hatamLogin","view null")
+//
+//                    }
+//                }else{
+//                    binding.layoutProgressbar.visibility=View.GONE
+//                    binding.layoutLoginPage.visibility=View.VISIBLE
+//                }
+//            }
+
+
             return binding.root
 
         }catch (e:Exception){
-            Log.e("sıcısım","OnCreate"+e.toString())
         }
         return binding.root
     }

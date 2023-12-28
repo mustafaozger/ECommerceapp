@@ -35,27 +35,30 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/searchBar">
 
-            <Spinner
-                android:id="@+id/spinner_sort"
+            <com.google.android.material.chip.Chip
+                android:id="@+id/btn_order"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:layout_weight="1"
                 android:background="@drawable/searchview_background"
-                android:layout_margin="5dp"
-                app:layout_constraintEnd_toStartOf="@+id/spinner_filter"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:text="Sırala"
+                android:textAlignment="center"
+                android:textSize="15sp" />
 
-            <Spinner
-                android:id="@+id/spinner_filter"
+            <com.google.android.material.chip.Chip
+                android:id="@+id/btn_filter"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:layout_weight="1"
                 android:background="@drawable/searchview_background"
-                android:layout_margin="5dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/spinner_sort"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:text="Filtrele"
+                android:textAlignment="center"
+                android:textSize="15sp" />
+
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -68,5 +71,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

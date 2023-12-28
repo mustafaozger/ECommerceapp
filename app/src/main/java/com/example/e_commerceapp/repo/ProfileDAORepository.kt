@@ -52,7 +52,7 @@ class ProfileDAORepository {
                     isSuccess(true)
                     message("Giriş Başarılı")
                     auth.uid?.let { it1 -> setUId(it1)
-//                        addUserToLocalDatabase(context,uid.toString())
+                        addUserToLocalDatabase(context,uid.toString())
                     }
                 }else{
                     isSuccess(false)
@@ -75,16 +75,16 @@ class ProfileDAORepository {
     }
 
 
-    fun isLogin(activity: Activity,callback :(Boolean)->Unit){
-//        val sp=activity.getSharedPreferences("UserInfo",Context.MODE_PRIVATE)
-//        val uid=sp.getString("uid",null)
-//        if (uid!=null){
-//            setUId(uid)
-//            Log.d("hatamProf","uid "+uid.toString())
-//            callback(true)
-//        }else{
-//            callback(false)
-//        }
+    fun isLogin(context: Context,callback :(Boolean)->Unit){
+        val sp=context.getSharedPreferences("UserInfo",Context.MODE_PRIVATE)
+        val uid=sp.getString("uid",null)
+        if (uid!=null){
+            setUId(uid)
+            Log.d("hatamProf","uid "+uid.toString())
+            callback(true)
+        }else{
+            callback(false)
+        }
 
     }
 

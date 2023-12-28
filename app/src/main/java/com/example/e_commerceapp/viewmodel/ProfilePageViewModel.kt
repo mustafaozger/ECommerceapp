@@ -28,8 +28,8 @@ class ProfilePageViewModel @Inject constructor(private var profileDAORepository:
         })
     }
     @Synchronized
-    fun isLogin(activity: Activity, callback: (Boolean)->Unit){
-        profileDAORepository.isLogin(activity,callback)
+    fun isLogin(context: Context, callback: (Boolean)->Unit){
+        profileDAORepository.isLogin(context ,callback)
     }
 
     fun logOut(context: Context){
