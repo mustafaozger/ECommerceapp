@@ -36,7 +36,11 @@
         android:id="@+id/profilePage"
         android:name="com.example.e_commerceapp.Pages.ProfilePage"
         android:label="fragment_profile_page"
-        tools:layout="@layout/fragment_profile_page" />
+        tools:layout="@layout/fragment_profile_page" >
+        <action
+            android:id="@+id/action_profilePage_to_loginPage"
+            app:destination="@id/loginPage" />
+    </fragment>
     <fragment
         android:id="@+id/productPage"
         android:name="com.example.e_commerceapp.Pages.ProductPage"

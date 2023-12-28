@@ -36,8 +36,6 @@ class LoginPage : Fragment() {
             profileViewModel=tempProfilePage
 
 
-
-
         }catch (e:Exception){
             Log.e("hatam",e.message.toString())
         }
@@ -49,13 +47,12 @@ class LoginPage : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         try {
+            binding=FragmentLoginPageBinding.inflate(layoutInflater)
 
-
-        binding=FragmentLoginPageBinding.inflate(layoutInflater)
 
 
         binding.signInButton.setOnClickListener{
-            profileViewModel.login(binding.loginEmail.text.toString(),binding.loginPassword.text.toString(), isSuccess = {isSuccess->
+            profileViewModel.login(requireContext(),binding.loginEmail.text.toString(),binding.loginPassword.text.toString(), isSuccess = {isSuccess->
                 if (isSuccess){
                     Navigation.findNavController(requireView()).navigate(R.id.action_loginPage_to_mainPage)
                 }

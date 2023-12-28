@@ -1,20 +1,13 @@
 package com.example.e_commerceapp.repo
 
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Context
 import android.util.Log
-import android.widget.Toast
-import androidx.lifecycle.MutableLiveData
-import androidx.navigation.Navigation
 import com.example.e_commerceapp.Classes.CartList
-import com.example.e_commerceapp.Classes.Categories
-import com.example.e_commerceapp.Classes.FavoriteList
-import com.example.e_commerceapp.Classes.Product
-import com.example.e_commerceapp.Classes.User
-import com.example.e_commerceapp.R
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.firestore
-import java.util.UUID
 
 class ProfileDAORepository {
 
@@ -51,26 +44,57 @@ class ProfileDAORepository {
     }
 
 
-    fun login(email:String,password:String,isSuccess:(Boolean)->Unit,message:(String)->Unit){
-
+    fun login(context:Context ,email:String,password:String,isSuccess:(Boolean)->Unit,message:(String)->Unit){
+        Log.d("hatamProf","loginworlk")
         if(email!="" && password != ""){
             auth.signInWithEmailAndPassword(email,password).addOnCompleteListener{
                 if(it.isSuccessful){
                     isSuccess(true)
                     message("Giriş Başarılı")
-                    auth.uid?.let { it1 -> setUId(it1) }
+                    auth.uid?.let { it1 -> setUId(it1)
+//                        addUserToLocalDatabase(context,uid.toString())
+                    }
                 }else{
                     isSuccess(false)
-                    message("E-mail or Password Wrong")
+                    message("E-posta yada Şifre Hatalı")
                 }
             }
         }else{
             isSuccess(false)
-            message("E-mail or Password Empty")
+            message("E-posta yada Şifre Boş")
         }
 
     }
 
+    @SuppressLint("CommitPrefEdits")
+    fun addUserToLocalDatabase(context: Context, uid:String){
+        val sp= context.getSharedPreferences("UserInfo",Context.MODE_PRIVATE)
+        val editor=sp.edit()
+        editor.putString("uid",uid)
+        editor.apply()
+    }
+
+
+    fun isLogin(activity: Activity,callback :(Boolean)->Unit){
+//        val sp=activity.getSharedPreferences("UserInfo",Context.MODE_PRIVATE)
+//        val uid=sp.getString("uid",null)
+//        if (uid!=null){
+//            setUId(uid)
+//            Log.d("hatamProf","uid "+uid.toString())
+//            callback(true)
+//        }else{
+//            callback(false)
+//        }
+
+    }
+
+    @SuppressLint("CommitPrefEdits")
+    fun logOut(context: Context){
+        val sp=context.getSharedPreferences("UserInfo",Context.MODE_PRIVATE)
+        val editor=sp.edit()
+        editor.remove("uid")
+
+    }
 
 
 }
