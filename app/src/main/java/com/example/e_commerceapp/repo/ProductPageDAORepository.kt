@@ -37,8 +37,6 @@ class ProductPageDAORepository {
     suspend fun loadProductList(){
 
         try {
-
-
             val returnedList = ArrayList<Product>()
 
             val ref = db.getReference("Products")

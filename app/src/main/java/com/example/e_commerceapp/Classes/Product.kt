@@ -9,5 +9,8 @@ data class Product( var product_id:String?=null
                    ,var product_price:Int?=null,
                    var product_category:Categories?=null,
                    var product_image:String?=null,
-                   var isFavorite:Boolean?=null) {
+                   var isFavorite:Boolean?=null,
+                    var fastorder:Boolean?=null
+                    ,var freecargo:Boolean?=null
+                    ,var newproduct:Boolean?=null) {
 }

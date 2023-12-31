@@ -10,7 +10,9 @@ import androidx.navigation.Navigation
 import com.example.e_commerceapp.R
 import com.example.e_commerceapp.databinding.FragmentProfilePageBinding
 import com.example.e_commerceapp.viewmodel.ProfilePageViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ProfilePage : Fragment() {
 
     lateinit var binding:FragmentProfilePageBinding
@@ -33,7 +35,7 @@ class ProfilePage : Fragment() {
 
         binding.layoutExit.setOnClickListener{
             profilePageViewModel.logOut(requireContext())
-            Navigation.findNavController(it).navigate(R.id.action_mainPage_to_profilePage)
+            Navigation.findNavController(it).navigate(R.id.action_profilePage_to_loginPage)
         }
 
         return binding.root
