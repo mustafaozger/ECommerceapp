@@ -1,9 +1,11 @@
 package com.example.e_commerceapp
 
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.replace
@@ -46,9 +48,6 @@ class MainActivity : AppCompatActivity() {
             val bottomNavView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
             bottomNavView.setupWithNavController(navController)
 
-
-
-
         }catch (e:Exception){
             Log.e("benimzortlamam",e.toString())
         }
@@ -57,6 +56,5 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
-
 
 }
