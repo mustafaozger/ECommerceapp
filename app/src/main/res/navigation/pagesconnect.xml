@@ -44,7 +44,12 @@
     <fragment
         android:id="@+id/productPage"
         android:name="com.example.e_commerceapp.Pages.ProductPage"
-        android:label="ProductPage" />
+        android:label="ProductPage" >
+        <argument
+            android:name="mainPageSearcQuery"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
     <fragment
         android:id="@+id/loginPage"
         android:name="com.example.e_commerceapp.Pages.LoginPage"

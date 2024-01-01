@@ -34,6 +34,7 @@
         private val filterOptions=MutableLiveData<FilterOptions>()
         var searchQuery= MutableLiveData<String?>()
         lateinit var adapter: ProductPageAdapter
+        lateinit var defaultString:String
 
 
         override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,8 +45,14 @@
             filterOptions.value=FilterOptions(null,null,false)
             val tempFavoritiesPageViewModel:FavoritiesPageViewModel by viewModels()
             favoritiesPageViewModel=tempFavoritiesPageViewModel
-            val str:String=""
-            searchQuery.value=str
+            val data = arguments?.getString("mainPageSearcQuery")
+            if(data!=null){
+                defaultString=data
+                Log.d("hatamOnCre","data "+ defaultString)
+            }else{
+                defaultString=""
+            }
+            searchQuery.value=defaultString
 
         }
 
