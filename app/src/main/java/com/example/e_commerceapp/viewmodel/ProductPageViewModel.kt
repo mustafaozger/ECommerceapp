@@ -13,7 +13,7 @@ class ProductPageViewModel  @Inject constructor(private var productDao:ProductPa
     private val _productList = MutableLiveData<ArrayList<Product>>()
 
 
-    fun getProductList(sortingMode: Int):  MutableLiveData<ArrayList<Product>> {
+    fun getProductList():  MutableLiveData<ArrayList<Product>> {
        return productDao.getProductList()
     }
 

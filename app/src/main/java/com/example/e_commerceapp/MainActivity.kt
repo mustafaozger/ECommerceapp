@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
             bottomNavView.setupWithNavController(navController)
 
         }catch (e:Exception){
-            Log.e("benimzortlamam",e.toString())
+            e.printStackTrace()
         }
 
     }
