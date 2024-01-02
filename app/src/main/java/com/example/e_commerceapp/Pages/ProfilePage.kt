@@ -1,5 +1,7 @@
 package com.example.e_commerceapp.Pages
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -36,6 +38,19 @@ class ProfilePage : Fragment() {
         binding.layoutExit.setOnClickListener{
             profilePageViewModel.logOut(requireContext())
             Navigation.findNavController(it).navigate(R.id.action_profilePage_to_loginPage)
+        }
+
+        binding.layoutCustomerService.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse("https://wa.me/+905558825243")
+            intent.setPackage("com.android.chrome")
+            if (intent.resolveActivity(requireContext().packageManager) != null) {
+                startActivity(intent)
+            } else {
+                // Chrome yüklü değilse, genel bir tarayıcı intent'i başlat
+                val genericIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://wa.me/+905558825243"))
+                startActivity(genericIntent)
+            }
         }
 
         return binding.root
