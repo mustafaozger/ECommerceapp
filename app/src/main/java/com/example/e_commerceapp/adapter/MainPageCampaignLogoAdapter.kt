@@ -2,9 +2,12 @@ package com.example.e_commerceapp.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.e_commerceapp.Classes.Campaigns
+import com.example.e_commerceapp.R
 import com.example.e_commerceapp.databinding.MainPageCampaignDesignBinding
 
 class MainPageCampaignLogoAdapter (var context: Context, var compaignList:List<Campaigns>):
@@ -29,5 +32,12 @@ class MainPageCampaignLogoAdapter (var context: Context, var compaignList:List<C
         val binding=holder.binding
         binding.campaignImage.setImageResource(compaignList.get(position).campaignImage!!)
         binding.campaignName.setText(compaignList.get(position).campaignName)
+        binding.campaignName.setOnClickListener {
+            Navigation.findNavController(it).navigate(R.id.action_mainPage_to_productPage)
+
+        }
+        binding.campaignImage.setOnClickListener {
+            Navigation.findNavController(it).navigate(R.id.action_mainPage_to_productPage)
+        }
     }
 }

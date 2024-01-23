@@ -60,7 +60,7 @@ class MainPage : Fragment(),SearchView.OnQueryTextListener {
             favoritiesPageViewModel.initFavoriteList(productPageViewModel)
 
               mainPageViewModel.getBanner().observe(viewLifecycleOwner) {
-                  val bannerAdapter = MainPageBannerAdadpter(requireContext(), it,requireView())
+                  val bannerAdapter = MainPageBannerAdadpter(requireContext(), it)
                   binding.rcylBanner.adapter = bannerAdapter
 
             }

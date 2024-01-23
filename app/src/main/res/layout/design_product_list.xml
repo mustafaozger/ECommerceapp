@@ -88,10 +88,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="10dp"
-            android:backgroundTint="#FFC801"
+            android:backgroundTint="#FF9800"
 
             android:text="Sepete Ekle"
-            android:textColor="#000000" />
+            android:textColor="#FFFFFF" />
 
     </LinearLayout>
 </layout>

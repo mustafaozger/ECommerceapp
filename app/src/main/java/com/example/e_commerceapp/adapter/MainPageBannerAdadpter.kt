@@ -11,7 +11,7 @@ import com.example.e_commerceapp.Classes.Banners
 import com.example.e_commerceapp.R
 import com.example.e_commerceapp.databinding.MainPageBannerDesignBinding
 
-class MainPageBannerAdadpter(var context: Context,var bannerList: List<Banners>,var view:View):
+class MainPageBannerAdadpter(var context: Context,var bannerList: List<Banners>):
     RecyclerView.Adapter<MainPageBannerAdadpter.MainPageBannerVH
             >() {
     inner class MainPageBannerVH(var binding: MainPageBannerDesignBinding):RecyclerView.ViewHolder(binding.root)
@@ -33,7 +33,7 @@ class MainPageBannerAdadpter(var context: Context,var bannerList: List<Banners>,
         binding.bannerImage.setImageResource(bannerList.get(position).bannerLink!!)
         binding.bannerImage.setOnClickListener {
             try {
-                Navigation.findNavController(view).navigate(R.id.action_mainPage_to_productPage)
+                Navigation.findNavController(it).navigate(R.id.action_mainPage_to_productPage)
 
             }catch (e:Exception){
                 Log.e("hatamMainAdapter",e.message.toString())

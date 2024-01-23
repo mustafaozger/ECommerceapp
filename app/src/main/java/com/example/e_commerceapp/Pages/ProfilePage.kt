@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.example.e_commerceapp.R
@@ -51,6 +52,19 @@ class ProfilePage : Fragment() {
                 val genericIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://wa.me/+905558825243"))
                 startActivity(genericIntent)
             }
+        }
+
+        binding.layoutComments.setOnClickListener {
+            Toast.makeText(requireContext(),"Değerlendirme Bulunamadı",Toast.LENGTH_SHORT).show()
+        }
+        binding.layoutOrders.setOnClickListener {
+            Toast.makeText(requireContext(),"Sipariş Bulunamadı",Toast.LENGTH_SHORT).show()
+        }
+        binding.layoutSettings.setOnClickListener {
+            Toast.makeText(requireContext(),"Ayarlara Erişilemedi",Toast.LENGTH_SHORT).show()
+        }
+        binding.imgCoupons.setOnClickListener {
+            Toast.makeText(requireContext(),"Kupon Bulunamadı",Toast.LENGTH_SHORT).show()
         }
 
         return binding.root
