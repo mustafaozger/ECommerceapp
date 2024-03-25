@@ -114,10 +114,9 @@ How is the task learned?
 Who else is involved in the task?
 - Just user.
 
+<img src="https://github.com/mustafaozger/ECommerceapp/assets/104151458/60771e4c-6a76-4f59-854b-6c23e6e9cd94" width=150 height=280>
 
-
-
-![UyeOl](https://github.com/mustafaozger/ECommerceapp/assets/104151458/60771e4c-6a76-4f59-854b-6c23e6e9cd94)
+![UyeOl](https://github.com/mustafaozger/ECommerceapp/assets/104151458/60771e4c-6a76-4f59-854b-6c23e6e9cd94) 
 ![Screenshot_20231119_223923](https://github.com/mustafaozger/ECommerceapp/assets/104151458/956dc403-cddc-4d53-81e5-f5729a2b9b12)
 ![Screenshot_20231217_124325](https://github.com/mustafaozger/ECommerceapp/assets/104151458/861d6ba3-8f82-44f5-9d13-6f9c38439d0e)
 ![Screenshot_20231217_124413](https://github.com/mustafaozger/ECommerceapp/assets/104151458/9c4c1344-b9cc-4bc9-b408-1168c824206f)
